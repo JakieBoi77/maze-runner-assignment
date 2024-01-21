@@ -51,10 +51,21 @@ public class Main {
 
         //Walking Skeleton
         logger.info("** Starting Maze Runner");
-        Configuration config = new Configuration(args);
+
+        Configuration config = new Configuration();
+        config.load(args);
+
         Maze maze = new Maze(config.maze);
+        Path provided_path = new Path(config.path);
+
         maze.solve();
-        maze.check(config.maze);
+        
+        if (provided_path == "") {
+            maze.displayPath();
+        } else {
+            maze.checkPath(provided_path);
+        }
+        
         logger.info("** End of MazeRunner");
     }
 }
