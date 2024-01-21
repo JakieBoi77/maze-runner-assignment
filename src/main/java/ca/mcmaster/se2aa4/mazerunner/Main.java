@@ -15,9 +15,9 @@ public class Main {
     private static final Logger logger = LogManager.getLogger();
 
     public static void main(String[] args) {
-        logger.info("** Starting Maze Runner");
         try {
             //Uses Apache CLI to parse -i flag
+            logger.info("**** Parsing Flags");
             Options options = new Options();
             options.addOption("-i", true, "The path to the maze file.");
             CommandLineParser parser = new DefaultParser();
@@ -48,8 +48,13 @@ public class Main {
         } catch(Exception e) {
             logger.error("/!\\ An error has occured /!\\");
         }
-        logger.info("**** Computing path");
-        logger.info("PATH NOT COMPUTED");
+
+        //Walking Skeleton
+        logger.info("** Starting Maze Runner");
+        Configuration config = new Configuration(args);
+        Maze maze = new Maze(config.maze);
+        maze.solve();
+        maze.check(config.maze);
         logger.info("** End of MazeRunner");
     }
 }
