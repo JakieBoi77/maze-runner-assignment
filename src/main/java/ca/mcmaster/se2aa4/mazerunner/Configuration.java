@@ -16,7 +16,8 @@ public class Configuration {
     String path = "";
     
     Configuration(String[] args) {
-        
+        //Add the ability to parse the -p flag
+
         //Uses Apache CLI to parse -i flag
         logger.info("**** Parsing Flags");
         Options options = new Options();

@@ -16,12 +16,11 @@ public class Main {
 
         Maze maze = new Maze(config.maze);
         Path provided = new Path(config.path);
-
-        Path solution = Maze.solve(maze);
         
         if (provided.path == "") {
-            Path.check(solution, provided);
+            Maze.check(provided);
         } else {
+            Path solution = Maze.solve(maze);
             solution.print();
         }
         

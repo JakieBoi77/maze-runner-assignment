@@ -12,8 +12,4 @@ public class Path {
     public void print() {
         System.out.println(path);
     }
-
-    public static void check(Path path1, Path path2) {
-        //Implement Path Checker
-    }
 }

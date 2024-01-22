@@ -39,4 +39,8 @@ public class Maze {
         Path path = new Path("Test");
         return path;
     }
+
+    public static void check(Path provided) {
+        //Implement Path Checker
+    }
 }
