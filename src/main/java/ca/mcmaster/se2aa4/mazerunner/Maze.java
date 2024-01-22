@@ -26,12 +26,24 @@ public class Maze {
             }
             reader.close();
         } catch(Exception e) {
-            logger.error("/!\\ An error has occured /!\\");
+            logger.error("An error has occured while reading the file.");
         }
     }
 
     public Path solve() {
-        //Implement Maze Solver
+        //Find maze start
+        int startRow;
+        for (int row = 0; row <= maze.length; row++) {
+            if (maze[row][0] == ' ') {
+                startRow = row;
+            } else {
+                logger.error("Start of maze not located.");
+                System.exit(0); //Terminate if not found
+            }
+        }
+        //Navigate maze (right hand on wall algorithm)
+
+
         Path path = new Path("Test");
         return path;
     }
