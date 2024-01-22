@@ -21,11 +21,11 @@ public class Configuration {
         //Uses Apache CLI to parse -i flag
         logger.info("Parsing Flags");
         Options options = new Options();
-        options.addOption("-i", true, "The path to the maze file.");
+        options.addOption("i", "input", true, "The path to the maze file.");
         CommandLineParser parser = new DefaultParser();
         try {
             CommandLine cmd = parser.parse(options, args);
-            maze = cmd.getOptionValue("-i");
+            maze = cmd.getOptionValue("i");
 
         } catch (ParseException pe) {
             logger.error("An error has occurred");

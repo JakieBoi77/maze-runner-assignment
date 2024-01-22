@@ -52,7 +52,7 @@ public class Maze {
         //Implement Path Checker
     }
 
-    public char getPointInfo(Point point) {
+    public char getPointInfo(Location point) {
         char data = this.maze[point.x_pos][point.y_pos];
         return data;
     }
