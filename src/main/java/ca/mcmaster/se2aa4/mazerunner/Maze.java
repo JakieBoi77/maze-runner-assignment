@@ -10,23 +10,19 @@ public class Maze {
     
     private static final Logger logger = LogManager.getLogger();
 
+    char[][] maze;
+
     Maze(String maze_file) {
-        //Implement Maze Parser
-        
+        logger.info("Reading the maze from file " + maze_file);
         try {
-            //Read the maze file
-            logger.info("**** Reading the maze from file " + maze_file);
             BufferedReader reader = new BufferedReader(new FileReader(maze_file));
             String line;
+            int row = 0;
             while ((line = reader.readLine()) != null) {
                 for (int idx = 0; idx < line.length(); idx++) {
-                    if (line.charAt(idx) == '#') {
-                        logger.info("WALL ");
-                    } else if (line.charAt(idx) == ' ') {
-                        logger.info("PASS ");
-                    }
+                    maze[row][idx] = line.charAt(idx);
                 }
-                logger.info(System.lineSeparator());
+                row ++;
             }
             reader.close();
         } catch(Exception e) {
@@ -34,7 +30,7 @@ public class Maze {
         }
     }
 
-    public static Path solve(Maze maze) {
+    public Path solve() {
         //Implement Maze Solver
         Path path = new Path("Test");
         return path;

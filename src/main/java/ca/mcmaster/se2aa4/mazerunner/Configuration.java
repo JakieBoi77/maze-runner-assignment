@@ -19,7 +19,7 @@ public class Configuration {
         //Add the ability to parse the -p flag
 
         //Uses Apache CLI to parse -i flag
-        logger.info("**** Parsing Flags");
+        logger.info("Parsing Flags");
         Options options = new Options();
         options.addOption("-i", true, "The path to the maze file.");
         CommandLineParser parser = new DefaultParser();

@@ -10,20 +10,20 @@ public class Main {
     public static void main(String[] args) {
         
         //Walking Skeleton
-        logger.info("** Starting Maze Runner");
+        logger.info("Starting Maze Runner");
 
         Configuration config = new Configuration(args);
 
         Maze maze = new Maze(config.maze);
-        Path provided = new Path(config.path);
+        Path provided = new Path(""/*config.path*/);
         
         if (provided.path == "") {
             Maze.check(provided);
         } else {
-            Path solution = Maze.solve(maze);
+            Path solution = maze.solve();
             solution.print();
         }
         
-        logger.info("** End of MazeRunner");
+        logger.info("End of MazeRunner");
     }
 }
