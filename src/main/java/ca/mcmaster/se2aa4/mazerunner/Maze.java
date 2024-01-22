@@ -51,4 +51,9 @@ public class Maze {
     public static void check(Path provided) {
         //Implement Path Checker
     }
+
+    public char getPointInfo(Point point) {
+        char data = this.maze[point.x_pos][point.y_pos];
+        return data;
+    }
 }
