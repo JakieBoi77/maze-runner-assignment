@@ -6,13 +6,10 @@ public class Location {
     int y_pos;
     Direction direction;
 
-    enum Direction {
-        NORTH, EAST, SOUTH, WEST
+    Location (int new_x, int new_y, Direction new_direction) {
+        this.x_pos = new_x;
+        this.y_pos = new_y;
+        this.direction = new_direction;
     }
-
-    Location (int x, int y, Direction direction) {
-        this.x_pos = x;
-        this.y_pos = y;
-        this.direction = direction;
-    }
+    
 }
