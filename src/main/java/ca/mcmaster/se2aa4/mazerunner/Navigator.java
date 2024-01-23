@@ -82,14 +82,9 @@ public class Navigator {
             default:
                 new_location = new Location(this.location.x_pos, this.location.y_pos, this.location.direction);
         }
-        char nextSpace = maze.getPointInfo(new_location);
 
-        if (nextSpace == ' ') {
-            logger.info("**** Moving to New Position: x = " + new_location.x_pos + ", y = " + new_location.x_pos + ", Direction = " + new_location.direction);
-            this.location = new_location;
-        } else {
-            logger.error("**** Cannot move into a wall.");
-        }
+        logger.info("**** Moving to New Position: x = " + new_location.x_pos + ", y = " + new_location.x_pos + ", Direction = " + new_location.direction);
+        this.location = new_location;
     }
 
     public void turnRight() {
