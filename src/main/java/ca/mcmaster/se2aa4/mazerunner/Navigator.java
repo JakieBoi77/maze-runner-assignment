@@ -26,7 +26,7 @@ public class Navigator {
                 ordinal_direction = directions[nextIndex];
                 break;
             case FORWARD:
-                ordinal_direction = directions[currentIndex];
+                ordinal_direction = this.location.direction;
                 break;
             case LEFT:
                 int previousIndex = (currentIndex - 1 + directions.length) % directions.length;
@@ -40,13 +40,13 @@ public class Navigator {
         Location new_location;
         switch (ordinal_direction) {
             case NORTH:
-                new_location = new Location(this.location.x_pos, this.location.y_pos + 1, this.location.direction);
+                new_location = new Location(this.location.x_pos, this.location.y_pos - 1, this.location.direction);
                 break;
             case EAST:
                 new_location = new Location(this.location.x_pos + 1, this.location.y_pos, this.location.direction);
                 break;
             case SOUTH:
-                new_location = new Location(this.location.x_pos, this.location.y_pos - 1, this.location.direction);
+                new_location = new Location(this.location.x_pos, this.location.y_pos + 1, this.location.direction);
                 break;
             case WEST:
                 new_location = new Location(this.location.x_pos - 1, this.location.y_pos, this.location.direction);
@@ -68,13 +68,13 @@ public class Navigator {
         Location new_location;
         switch (this.location.direction) {
             case NORTH:
-                new_location = new Location(this.location.x_pos, this.location.y_pos + 1, this.location.direction);
+                new_location = new Location(this.location.x_pos, this.location.y_pos - 1, this.location.direction);
                 break;
             case EAST:
                 new_location = new Location(this.location.x_pos + 1, this.location.y_pos, this.location.direction);
                 break;
             case SOUTH:
-                new_location = new Location(this.location.x_pos, this.location.y_pos - 1, this.location.direction);
+                new_location = new Location(this.location.x_pos, this.location.y_pos + 1, this.location.direction);
                 break;
             case WEST:
                 new_location = new Location(this.location.x_pos - 1, this.location.y_pos, this.location.direction);
@@ -83,23 +83,23 @@ public class Navigator {
                 new_location = new Location(this.location.x_pos, this.location.y_pos, this.location.direction);
         }
 
-        logger.info("**** Moving to New Position: x = " + new_location.x_pos + ", y = " + new_location.x_pos + ", Direction = " + new_location.direction);
+        logger.info("**** Moving to New Position: x = " + new_location.x_pos + ", y = " + new_location.y_pos + ", Direction = " + new_location.direction);
         this.location = new_location;
     }
 
     public void turnRight() {
-        logger.info("**** Turning Right");
         OrdinalDirection[] directions = OrdinalDirection.values();
         int currentIndex = this.location.direction.ordinal();
         int nextIndex = (currentIndex + 1) % directions.length;
+        logger.info("**** Turning Right, New Direction: " + directions[nextIndex]);
         this.location.direction = directions[nextIndex];
     }
 
     public void turnLeft() {
-        logger.info("**** Turning Left");
         OrdinalDirection[] directions = OrdinalDirection.values();
         int currentIndex = this.location.direction.ordinal();
         int previousIndex = (currentIndex - 1 + directions.length) % directions.length;
+        logger.info("**** Turning Left, New Direction: " + directions[previousIndex]);
         this.location.direction = directions[previousIndex];
     }
 }

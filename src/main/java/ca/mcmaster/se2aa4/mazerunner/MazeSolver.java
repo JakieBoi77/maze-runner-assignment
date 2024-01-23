@@ -8,16 +8,9 @@ public class MazeSolver {
     private static final Logger logger = LogManager.getLogger();
 
     public static Path solveMaze(Maze input_maze) {
-        logger.info("**** Computing Path");
+        logger.info("*** Computing Path");
         
         char[][] maze = input_maze.maze_data;
-
-        for (int i = 0; i < maze.length; i++) {
-            for (int j = 0; j < maze[i].length; j++) {
-                System.out.print(maze[i][j] + " ");
-            }
-            System.out.println();
-        }
 
         //Find maze start location
         int startRow = 0;
@@ -27,6 +20,7 @@ public class MazeSolver {
             }
         }
         Location startLocation = new Location(0, startRow, OrdinalDirection.EAST);
+        logger.info("*** Start Location: x = " + startLocation.x_pos + ", y = " + startLocation.y_pos);
 
         //Find maze end location
         int endRow = 0;
@@ -36,27 +30,40 @@ public class MazeSolver {
             }
         }
         Location endLocation = new Location(maze[0].length - 1, endRow, OrdinalDirection.EAST);
+        logger.info("*** End Location: x = " + endLocation.x_pos + ", y = " + endLocation.y_pos);
 
         //Navigate maze (right hand on wall algorithm)
         String path = "";
+        Boolean wallOnRight = false;
+        Boolean wallInFront = false;
         Navigator navigator = new Navigator(startLocation, input_maze);
-        while ((navigator.location.x_pos != endLocation.x_pos) && (navigator.location.y_pos != endLocation.y_pos)) {
+        while ((navigator.location.x_pos != endLocation.x_pos) || (navigator.location.y_pos != endLocation.y_pos)) {
+            wallOnRight = navigator.checkWall(RelativeDirection.RIGHT);
+            wallInFront = navigator.checkWall(RelativeDirection.FORWARD);
             //When wall on right and wall in front, turn left
-            if ((navigator.checkWall(RelativeDirection.RIGHT)) && (navigator.checkWall(RelativeDirection.FORWARD))) {
+            if (wallOnRight && wallInFront) {
                 navigator.turnLeft();
                 path += "L";
             } 
-            //When wall on right move forward an no wall in front, move forward
-            else if ((navigator.checkWall(RelativeDirection.RIGHT)) && !(navigator.checkWall(RelativeDirection.FORWARD))) {
+            //When wall on right and no wall in front, move forward
+            else if (wallOnRight && !wallInFront) {
                 navigator.moveForward();
                 path += "F";
             } 
-            //When no wall on right turn right
-            else {
+            //When no wall on right turn right and move forward
+            else if (!wallOnRight){
                 navigator.turnRight();
                 path += "R";
+                navigator.moveForward();
+                path += "F";
+            }
+            //Terminate otherwise
+            else {
+                logger.error("*** Wall Lost!");
+                break;
             }
         }
+        logger.info("*** Reached the End of the Maze");
 
         Path solution = new Path(path);
         return solution;

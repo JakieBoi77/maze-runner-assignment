@@ -23,7 +23,7 @@ public class Maze {
             BufferedReader reader = new BufferedReader(new FileReader(maze_file));
             String line;
             while ((line = reader.readLine()) != null) {
-                char[] row = line.trim().toCharArray();
+                char[] row = line.toCharArray();
                 maze_rows.add(row);
             }
             reader.close();
@@ -37,6 +37,6 @@ public class Maze {
     }
 
     public char getPointInfo(Location location) {
-        return this.maze_data[location.x_pos][location.y_pos];
+        return this.maze_data[location.y_pos][location.x_pos];
     }
 }
