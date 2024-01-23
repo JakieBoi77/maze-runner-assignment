@@ -12,29 +12,30 @@ public class MazeSolver {
         
         char[][] maze = input_maze.maze_data;
 
+        for (int i = 0; i < maze.length; i++) {
+            for (int j = 0; j < maze[i].length; j++) {
+                System.out.print(maze[i][j] + " ");
+            }
+            System.out.println();
+        }
+
         //Find maze start location
         int startRow = 0;
-        for (int row = 0; row <= maze.length; row++) {
+        for (int row = 0; row < maze.length; row++) {
             if (maze[row][0] == ' ') {
                 startRow = row;
-            } else {
-                logger.error("/!\\ An error has occured /!\\");
-                System.exit(0); //Terminate if not found
             }
         }
         Location startLocation = new Location(0, startRow, OrdinalDirection.EAST);
 
         //Find maze end location
         int endRow = 0;
-        for (int row = 0; row <= maze.length; row++) {
-            if (maze[row][maze[0].length] == ' ') {
+        for (int row = 0; row < maze.length; row++) {
+            if (maze[row][maze[0].length - 1] == ' ') {
                 endRow = row;
-            } else {
-                logger.error("/!\\ An error has occured /!\\");
-                System.exit(0); //Terminate if not found
             }
         }
-        Location endLocation = new Location(maze[0].length, endRow, OrdinalDirection.EAST);
+        Location endLocation = new Location(maze[0].length - 1, endRow, OrdinalDirection.EAST);
 
         //Navigate maze (right hand on wall algorithm)
         String path = "";
