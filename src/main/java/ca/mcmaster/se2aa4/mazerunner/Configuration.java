@@ -18,7 +18,7 @@ public class Configuration {
     
     Configuration(String[] args) {
 
-        logger.info("*** Parsing Flags");
+        logger.info("* Parsing Flags");
         Options options = new Options();
         options.addOption("i", "input", true, "Specifies the filename of the maze file.");
         options.addOption("p", "path", true, "Verfies if a given path will solve the provided maze.");
@@ -33,7 +33,7 @@ public class Configuration {
             }
             
         } catch (ParseException pe) {
-            logger.error("*** An error has occurred");
+            logger.error("* An error has occurred");
         }
     }
 }

@@ -83,7 +83,7 @@ public class Navigator {
                 new_location = new Location(this.location.x_pos, this.location.y_pos, this.location.direction);
         }
 
-        logger.info("**** Moving to New Position: x = " + new_location.x_pos + ", y = " + new_location.y_pos + ", Direction = " + new_location.direction);
+        logger.info("***** Moving to New Position: x = " + new_location.x_pos + ", y = " + new_location.y_pos + ", Direction = " + new_location.direction);
         this.location = new_location;
     }
 
@@ -91,7 +91,7 @@ public class Navigator {
         OrdinalDirection[] directions = OrdinalDirection.values();
         int currentIndex = this.location.direction.ordinal();
         int nextIndex = (currentIndex + 1) % directions.length;
-        logger.info("**** Turning Right, New Direction: " + directions[nextIndex]);
+        logger.info("***** Turning Right, New Direction: " + directions[nextIndex]);
         this.location.direction = directions[nextIndex];
     }
 
@@ -99,7 +99,7 @@ public class Navigator {
         OrdinalDirection[] directions = OrdinalDirection.values();
         int currentIndex = this.location.direction.ordinal();
         int previousIndex = (currentIndex - 1 + directions.length) % directions.length;
-        logger.info("**** Turning Left, New Direction: " + directions[previousIndex]);
+        logger.info("***** Turning Left, New Direction: " + directions[previousIndex]);
         this.location.direction = directions[previousIndex];
     }
 }

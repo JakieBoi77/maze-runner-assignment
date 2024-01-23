@@ -10,7 +10,7 @@ public class Main {
     public static void main(String[] args) {
         
         //Walking Skeleton
-        logger.info("** Starting Maze Runner");
+        logger.info("********** Starting Maze Runner");
 
         Configuration config = new Configuration(args);
 
@@ -24,6 +24,6 @@ public class Main {
             solution.print();
         }
         
-        logger.info("** End of MazeRunner");
+        logger.info("********** End of MazeRunner");
     }
 }

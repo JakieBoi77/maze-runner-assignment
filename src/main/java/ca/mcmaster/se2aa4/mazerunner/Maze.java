@@ -15,7 +15,7 @@ public class Maze {
     char[][] maze_data;
 
     Maze(String maze_file) {
-        logger.info("**** Reading the maze from file " + maze_file);
+        logger.info("********** Reading the maze from file " + maze_file);
 
         List<char[]> maze_rows = new ArrayList<>();
 

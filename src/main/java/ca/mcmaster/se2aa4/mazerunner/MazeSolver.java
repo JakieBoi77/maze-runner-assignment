@@ -8,7 +8,7 @@ public class MazeSolver {
     private static final Logger logger = LogManager.getLogger();
 
     public static Path solveMaze(Maze input_maze) {
-        logger.info("*** Computing Path");
+        logger.info("**** Computing Path");
         
         char[][] maze = input_maze.maze_data;
 
@@ -20,7 +20,7 @@ public class MazeSolver {
             }
         }
         Location startLocation = new Location(0, startRow, OrdinalDirection.EAST);
-        logger.info("*** Start Location: x = " + startLocation.x_pos + ", y = " + startLocation.y_pos);
+        logger.info("**** Start Location: x = " + startLocation.x_pos + ", y = " + startLocation.y_pos);
 
         //Find maze end location
         int endRow = 0;
@@ -30,7 +30,7 @@ public class MazeSolver {
             }
         }
         Location endLocation = new Location(maze[0].length - 1, endRow, OrdinalDirection.EAST);
-        logger.info("*** End Location: x = " + endLocation.x_pos + ", y = " + endLocation.y_pos);
+        logger.info("**** End Location: x = " + endLocation.x_pos + ", y = " + endLocation.y_pos);
 
         //Navigate maze (right hand on wall algorithm)
         String path = "";
@@ -59,11 +59,11 @@ public class MazeSolver {
             }
             //Terminate otherwise
             else {
-                logger.error("*** Wall Lost!");
+                logger.error("**** Wall Lost!");
                 break;
             }
         }
-        logger.info("*** Reached the End of the Maze");
+        logger.info("**** Reached the End of the Maze");
 
         Path solution = new Path(path);
         return solution;
