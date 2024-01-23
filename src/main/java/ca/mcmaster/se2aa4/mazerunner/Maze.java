@@ -2,6 +2,8 @@ package ca.mcmaster.se2aa4.mazerunner;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -14,20 +16,24 @@ public class Maze {
 
     Maze(String maze_file) {
         logger.info("**** Reading the maze from file " + maze_file);
+
+        List<char[]> maze_rows = new ArrayList<>();
+
         try {
             BufferedReader reader = new BufferedReader(new FileReader(maze_file));
             String line;
-            int row = 0;
             while ((line = reader.readLine()) != null) {
-                for (int idx = 0; idx < line.length(); idx++) {
-                    maze_data[row][idx] = line.charAt(idx);
-                }
-                row ++;
+                char[] row = line.trim().toCharArray();
+                maze_rows.add(row);
             }
             reader.close();
         } catch(Exception e) {
             logger.error("/!\\ An error has occured /!\\");
+            System.out.println(maze_data);
         }
+
+        maze_data = new char[maze_rows.size()][];
+        maze_data = maze_rows.toArray(maze_data);
     }
 
     public char getPointInfo(Location location) {
