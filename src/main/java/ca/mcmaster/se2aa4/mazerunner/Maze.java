@@ -10,7 +10,7 @@ public class Maze {
     
     private static final Logger logger = LogManager.getLogger();
 
-    char[][] maze;
+    char[][] maze_data;
 
     Maze(String maze_file) {
         logger.info("**** Reading the maze from file " + maze_file);
@@ -20,7 +20,7 @@ public class Maze {
             int row = 0;
             while ((line = reader.readLine()) != null) {
                 for (int idx = 0; idx < line.length(); idx++) {
-                    maze[row][idx] = line.charAt(idx);
+                    maze_data[row][idx] = line.charAt(idx);
                 }
                 row ++;
             }
@@ -31,6 +31,6 @@ public class Maze {
     }
 
     public char getPointInfo(Location location) {
-        return this.maze[location.x_pos][location.y_pos];
+        return this.maze_data[location.x_pos][location.y_pos];
     }
 }
