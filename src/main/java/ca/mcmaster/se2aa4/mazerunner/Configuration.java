@@ -14,21 +14,26 @@ public class Configuration {
 
     String maze = "";
     String path = "";
+    boolean path_provided = false;
     
     Configuration(String[] args) {
-        //Add the ability to parse the -p flag
 
-        //Uses Apache CLI to parse -i flag
-        logger.info("Parsing Flags");
+        logger.info("*** Parsing Flags");
         Options options = new Options();
-        options.addOption("i", "input", true, "The path to the maze file.");
+        options.addOption("i", "input", true, "Specifies the filename of the maze file.");
+        options.addOption("p", "path", true, "Verfies if a given path will solve the provided maze.");
         CommandLineParser parser = new DefaultParser();
         try {
             CommandLine cmd = parser.parse(options, args);
-            maze = cmd.getOptionValue("i");
+            this.maze = cmd.getOptionValue("i");
 
+            if (cmd.hasOption("p")) {
+                this.path = cmd.getOptionValue("p");
+                this.path_provided = true;
+            }
+            
         } catch (ParseException pe) {
-            logger.error("An error has occurred");
+            logger.error("*** An error has occurred");
         }
     }
 }
