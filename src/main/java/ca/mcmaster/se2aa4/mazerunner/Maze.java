@@ -26,7 +26,7 @@ public class Maze {
             }
             reader.close();
         } catch(Exception e) {
-            logger.error("**** An error has occured while reading the file.");
+            logger.error("/!\\ An error has occured /!\\");
         }
     }
 

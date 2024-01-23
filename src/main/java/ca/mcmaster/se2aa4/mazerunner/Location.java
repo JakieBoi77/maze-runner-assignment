@@ -4,12 +4,12 @@ public class Location {
     
     int x_pos;
     int y_pos;
-    Direction direction;
+    OrdinalDirection direction;
 
-    Location (int new_x, int new_y, Direction new_direction) {
+    Location (int new_x, int new_y, OrdinalDirection new_direction) {
         this.x_pos = new_x;
         this.y_pos = new_y;
         this.direction = new_direction;
     }
-    
+
 }

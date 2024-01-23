@@ -6,7 +6,7 @@ public class Path {
 
     Path(String input_path) {
         //Implement Path Factorizer
-        path = input_path;
+        this.path = input_path;
     }
 
     public void print() {
