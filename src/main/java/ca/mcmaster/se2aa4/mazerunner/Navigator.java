@@ -15,29 +15,78 @@ public class Navigator {
         this.maze = maze;
     }
 
-    public void moveForward() {
-        Location new_location;
-        switch (location.direction) {
-            case NORTH:
-                new_location = new Location(location.x_pos, location.y_pos + 1, location.direction);
+    public boolean checkWall(RelativeDirection relative_direction) {
+        //Converts relative direction to an ordinal direction
+        OrdinalDirection ordinal_direction;
+        OrdinalDirection[] directions = OrdinalDirection.values();
+        int currentIndex = this.location.direction.ordinal();
+        switch (relative_direction) {
+            case RIGHT:
+                int nextIndex = (currentIndex + 1) % directions.length;
+                ordinal_direction = directions[nextIndex];
                 break;
-            case EAST:
-                new_location = new Location(location.x_pos + 1, location.y_pos, location.direction);
+            case FORWARD:
+                ordinal_direction = directions[currentIndex];
                 break;
-            case SOUTH:
-                new_location = new Location(location.x_pos, location.y_pos - 1, location.direction);
-                break;
-            case WEST:
-                new_location = new Location(location.x_pos - 1, location.y_pos, location.direction);
+            case LEFT:
+                int previousIndex = (currentIndex - 1 + directions.length) % directions.length;
+                ordinal_direction = directions[previousIndex];
                 break;
             default:
-                new_location = new Location(location.x_pos, location.y_pos, location.direction);
+                ordinal_direction = directions[currentIndex];
+        }
+        
+        //Gets the maze tile that is in that direction
+        Location new_location;
+        switch (ordinal_direction) {
+            case NORTH:
+                new_location = new Location(this.location.x_pos, this.location.y_pos + 1, this.location.direction);
+                break;
+            case EAST:
+                new_location = new Location(this.location.x_pos + 1, this.location.y_pos, this.location.direction);
+                break;
+            case SOUTH:
+                new_location = new Location(this.location.x_pos, this.location.y_pos - 1, this.location.direction);
+                break;
+            case WEST:
+                new_location = new Location(this.location.x_pos - 1, this.location.y_pos, this.location.direction);
+                break;
+            default:
+                new_location = new Location(this.location.x_pos, this.location.y_pos, this.location.direction);
+        }
+        char tile = maze.getPointInfo(new_location);
+        
+        //Returns true if there is a wall
+        if (tile == '#') {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public void moveForward() {
+        Location new_location;
+        switch (this.location.direction) {
+            case NORTH:
+                new_location = new Location(this.location.x_pos, this.location.y_pos + 1, this.location.direction);
+                break;
+            case EAST:
+                new_location = new Location(this.location.x_pos + 1, this.location.y_pos, this.location.direction);
+                break;
+            case SOUTH:
+                new_location = new Location(this.location.x_pos, this.location.y_pos - 1, this.location.direction);
+                break;
+            case WEST:
+                new_location = new Location(this.location.x_pos - 1, this.location.y_pos, this.location.direction);
+                break;
+            default:
+                new_location = new Location(this.location.x_pos, this.location.y_pos, this.location.direction);
         }
         char nextSpace = maze.getPointInfo(new_location);
 
         if (nextSpace == ' ') {
             logger.info("**** Moving to New Position: x = " + new_location.x_pos + ", y = " + new_location.x_pos + ", Direction = " + new_location.direction);
-            location = new_location;
+            this.location = new_location;
         } else {
             logger.error("**** Cannot move into a wall.");
         }
@@ -45,7 +94,7 @@ public class Navigator {
 
     public void turnRight() {
         logger.info("**** Turning Right");
-        Direction[] directions = Direction.values();
+        OrdinalDirection[] directions = OrdinalDirection.values();
         int currentIndex = this.location.direction.ordinal();
         int nextIndex = (currentIndex + 1) % directions.length;
         this.location.direction = directions[nextIndex];
@@ -53,7 +102,7 @@ public class Navigator {
 
     public void turnLeft() {
         logger.info("**** Turning Left");
-        Direction[] directions = Direction.values();
+        OrdinalDirection[] directions = OrdinalDirection.values();
         int currentIndex = this.location.direction.ordinal();
         int previousIndex = (currentIndex - 1 + directions.length) % directions.length;
         this.location.direction = directions[previousIndex];
