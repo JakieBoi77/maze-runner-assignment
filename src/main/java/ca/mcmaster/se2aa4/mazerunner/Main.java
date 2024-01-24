@@ -18,7 +18,7 @@ public class Main {
         
         if (config.path_provided) {
             Path provided = new Path(config.path);
-            MazeSolver.check(provided);
+            MazeSolver.check(maze, provided);
         } else {
             Path solution = MazeSolver.solveMaze(maze);
             solution.print();

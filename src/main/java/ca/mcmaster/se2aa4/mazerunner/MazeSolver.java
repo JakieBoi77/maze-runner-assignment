@@ -69,7 +69,60 @@ public class MazeSolver {
         return solution;
     }
 
-    public static void check(Path provided) {
-        //Implement Path Checker
+    public static void check(Maze input_maze, Path provided) {
+        logger.info("**** Checking Path");
+        char[] path = provided.path.toCharArray();
+        char[][] maze = input_maze.maze_data;
+
+        //Find maze start location
+        int startRow = 0;
+        for (int row = 0; row < maze.length; row++) {
+            if (maze[row][0] == ' ') {
+                startRow = row;
+            }
+        }
+        Location startLocation = new Location(0, startRow, OrdinalDirection.EAST);
+
+        //Find maze end location
+        int endRow = 0;
+        for (int row = 0; row < maze.length; row++) {
+            if (maze[row][maze[0].length - 1] == ' ') {
+                endRow = row;
+            }
+        }
+        Location endLocation = new Location(maze[0].length - 1, endRow, OrdinalDirection.EAST);
+
+        Navigator navigator = new Navigator(startLocation, input_maze);
+        for (int i = 0; i < path.length; i++) {
+            if (input_maze.getPointInfo(navigator.location) == '#') {
+                logger.info("**** Navigator enter a wall. Invalid Path.");
+                System.out.println("Incorrect Path!");
+                return;
+            }
+
+            char next_move = path[i];
+            switch (next_move) {
+                case 'F':
+                    navigator.moveForward();
+                    break;
+                case 'R':
+                    navigator.turnRight();
+                    break;
+                case 'L':
+                    navigator.turnLeft();
+                    break;
+                default:
+                    logger.error("**** Invalid path character.");
+                    return;
+            }
+        }
+
+        if((navigator.location.x_pos == endLocation.x_pos) && (navigator.location.y_pos == endLocation.y_pos)) {
+            logger.info("**** Navigator reached the end position.");
+            System.out.println("Correct Path!");
+        } else {
+            logger.info("**** Navigator did not make to the end postion.");
+            System.out.println("Incorrect Path!");
+        }
     }
 }
