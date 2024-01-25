@@ -121,7 +121,7 @@ public class MazeSolver {
             logger.info("**** Navigator reached the end position.");
             System.out.println("Correct Path!");
         } else {
-            logger.info("**** Navigator did not make to the end postion.");
+            logger.info("**** Navigator did not make it to the end postion.");
             System.out.println("Incorrect Path!");
         }
     }

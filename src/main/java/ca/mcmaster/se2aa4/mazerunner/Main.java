@@ -18,9 +18,11 @@ public class Main {
         
         if (config.path_provided) {
             Path provided = new Path(config.path);
+            provided.unfactorize();
             MazeSolver.check(maze, provided);
         } else {
             Path solution = MazeSolver.solveMaze(maze);
+            solution.factorize();
             solution.print();
         }
         
