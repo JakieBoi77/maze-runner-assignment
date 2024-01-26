@@ -82,6 +82,11 @@ public class Navigator {
             default:
                 new_location = new Location(this.location.x_pos, this.location.y_pos, this.location.direction);
         }
+        if (new_location.x_pos < 0 || new_location.x_pos >= this.maze.maze_data[0].length
+        || new_location.x_pos < 0 || new_location.x_pos >= this.maze.maze_data.length) {
+            logger.error("***** Cannot move to requested location.");
+            return;
+        }
 
         logger.info("***** Moving to New Position: x = " + new_location.x_pos + ", y = " + new_location.y_pos + ", Direction = " + new_location.direction);
         this.location = new_location;
