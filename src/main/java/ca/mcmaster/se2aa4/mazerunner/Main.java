@@ -16,12 +16,14 @@ public class Main {
 
         Maze maze = new Maze(config.maze);
         
+        Solver solver = new RightHandSolver();
+
         if (config.path_provided) {
             Path provided = new Path(config.path);
             provided.unfactorize();
-            MazeSolver.check(maze, provided);
+            solver.check(maze, provided);
         } else {
-            Path solution = MazeSolver.solveMaze(maze);
+            Path solution = solver.solveMaze(maze);
             solution.factorize();
             solution.print();
         }

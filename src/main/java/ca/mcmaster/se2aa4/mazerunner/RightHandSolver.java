@@ -3,12 +3,13 @@ package ca.mcmaster.se2aa4.mazerunner;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-public class MazeSolver {
+public class RightHandSolver implements Solver {
 
     private static final Logger logger = LogManager.getLogger();
 
-    public static Path solveMaze(Maze input_maze) {
-        logger.info("**** Computing Path");
+    @Override
+    public Path solveMaze(Maze input_maze) {
+        logger.info("Computing Path");
         
         char[][] maze = input_maze.maze_data;
 
@@ -20,7 +21,7 @@ public class MazeSolver {
             }
         }
         Location startLocation = new Location(0, startRow, OrdinalDirection.EAST);
-        logger.info("**** Start Location: x = " + startLocation.x_pos + ", y = " + startLocation.y_pos);
+        logger.info("Start Location: x = " + startLocation.x_pos + ", y = " + startLocation.y_pos);
 
         //Find maze end location
         int endRow = 0;
@@ -30,7 +31,7 @@ public class MazeSolver {
             }
         }
         Location endLocation = new Location(maze[0].length - 1, endRow, OrdinalDirection.EAST);
-        logger.info("**** End Location: x = " + endLocation.x_pos + ", y = " + endLocation.y_pos);
+        logger.info("End Location: x = " + endLocation.x_pos + ", y = " + endLocation.y_pos);
 
         //Navigate maze (right hand on wall algorithm)
         String path = "";
@@ -59,18 +60,19 @@ public class MazeSolver {
             }
             //Terminate otherwise
             else {
-                logger.error("**** Wall Lost!");
+                logger.error("Wall Lost!");
                 break;
             }
         }
-        logger.info("**** Reached the End of the Maze");
+        logger.info("Reached the End of the Maze");
 
         Path solution = new Path(path);
         return solution;
     }
 
-    public static void check(Maze input_maze, Path provided) {
-        logger.info("**** Checking Path");
+    @Override
+    public void check(Maze input_maze, Path provided) {
+        logger.info("Checking Path");
         char[] path = provided.path.toCharArray();
         char[][] maze = input_maze.maze_data;
 
@@ -95,7 +97,7 @@ public class MazeSolver {
         Navigator navigator = new Navigator(startLocation, input_maze);
         for (int i = 0; i < path.length; i++) {
             if (input_maze.getPointInfo(navigator.location) == '#') {
-                logger.info("**** Navigator enter a wall. Invalid Path.");
+                logger.info("Navigator enter a wall. Invalid Path.");
                 System.out.println("Incorrect Path!");
                 return;
             }
@@ -112,16 +114,16 @@ public class MazeSolver {
                     navigator.turnLeft();
                     break;
                 default:
-                    logger.error("**** Invalid path character.");
+                    logger.error("Invalid path character.");
                     return;
             }
         }
 
         if((navigator.location.x_pos == endLocation.x_pos) && (navigator.location.y_pos == endLocation.y_pos)) {
-            logger.info("**** Navigator reached the end position.");
+            logger.info("Navigator reached the end position.");
             System.out.println("Correct Path!");
         } else {
-            logger.info("**** Navigator did not make it to the end postion.");
+            logger.info("Navigator did not make it to the end postion.");
             System.out.println("Incorrect Path!");
         }
     }
