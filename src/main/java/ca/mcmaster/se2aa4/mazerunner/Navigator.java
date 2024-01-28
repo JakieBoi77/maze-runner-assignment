@@ -83,8 +83,9 @@ public class Navigator {
                 new_location = new Location(this.location.x_pos, this.location.y_pos, this.location.direction);
         }
         if (new_location.x_pos < 0 || new_location.x_pos >= this.maze.maze_data[0].length
-        || new_location.x_pos < 0 || new_location.x_pos >= this.maze.maze_data.length) {
+        || new_location.y_pos < 0 || new_location.y_pos >= this.maze.maze_data.length) {
             logger.error("***** Cannot move to requested location.");
+            System.exit(0);
             return;
         }
 
