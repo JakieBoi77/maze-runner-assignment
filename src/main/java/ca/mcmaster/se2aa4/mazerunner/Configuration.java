@@ -50,7 +50,7 @@ public class Configuration {
 
                     case "bfs":
                         // Initialize a BreadthFirstSearchSolver maze service
-                        logger.info("Using dijkstra maze solving algorithm.");
+                        logger.info("Using BFS maze solving algorithm.");
                         MazeFactory<GraphMaze> graphMazeFactory = new GraphMazeFactory();
                         this.mazeService = new BreadthFirstSearchSolver(graphMazeFactory.build(mazeFile));
                         break;

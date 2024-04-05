@@ -6,17 +6,18 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import ca.mcmaster.se2aa4.mazerunner.maze.Maze;
+import ca.mcmaster.se2aa4.mazerunner.maze.MazeElement;
 import ca.mcmaster.se2aa4.mazerunner.util.Coordinate;
 
 public class StandardMaze implements Maze {
     
     private static final Logger logger = LogManager.getLogger();
 
-    List<List<StandardElement>> maze;
+    List<List<MazeElement>> maze;
     Coordinate start;
     Coordinate end;
 
-    public StandardMaze(List<List<StandardElement>> maze) {
+    public StandardMaze(List<List<MazeElement>> maze) {
         this.maze = maze;
         try {
             this.start = findStart();
@@ -25,7 +26,7 @@ public class StandardMaze implements Maze {
             logger.error("********* Failed to create Standard Maze.  Reason: " + e.getMessage());
             logger.error("PATH NOT COMPUTED");
         }
-        logger.info("********* Standard maze created.");
+        logger.info("********* Standard maze successfully built.");
     }
 
     private Coordinate findStart() throws Exception {
@@ -64,8 +65,8 @@ public class StandardMaze implements Maze {
             throw new IllegalStateException("y-value, " + yVal + ", is out of bounds.");
         }
 
-        StandardElement elem = this.maze.get(yVal).get(xVal);
-        return elem == StandardElement.WALL;
+        MazeElement elem = this.maze.get(yVal).get(xVal);
+        return elem == MazeElement.WALL;
     }
 
     public Coordinate getStart() {

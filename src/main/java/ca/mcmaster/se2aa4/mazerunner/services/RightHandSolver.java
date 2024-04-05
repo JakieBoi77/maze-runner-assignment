@@ -20,7 +20,7 @@ public class RightHandSolver implements MazeService {
 
     @Override
     public void run() {
-        logger.info("Computing Path");
+        logger.info("****** Computing Path");
 
         Coordinate currentPos = this.maze.getStart();
         Coordinate endPos = this.maze.getEnd();
@@ -39,19 +39,19 @@ public class RightHandSolver implements MazeService {
 
             //When wall on right and wall in front, turn left
             if (wallOnRight && wallInFront) {
-                logger.info("Turn Left");
+                logger.info("****** Turn Left");
                 direction = direction.left();
                 path += "L";
             } 
             //When wall on right and no wall in front, move forward
             else if (wallOnRight && !wallInFront) {
-                logger.info("Move Forward");
+                logger.info("****** Move Forward");
                 currentPos = currentPos.get(direction);
                 path += "F";
             } 
             //When no wall on right turn right and move forward
             else if (!wallOnRight){
-                logger.info("Turn Right and Moving Forward");
+                logger.info("****** Turn Right and Moving Forward");
                 direction = direction.right();
                 path += "R";
                 currentPos = currentPos.get(direction);
@@ -61,10 +61,10 @@ public class RightHandSolver implements MazeService {
             else {
                 logger.error("Wall Lost!");
             }
-            logger.info("New Position: x = " + currentPos.x() + ", y = " + currentPos.y());
+            logger.info("****** New Position: x = " + currentPos.x() + ", y = " + currentPos.y());
         }
 
-        logger.info("Reached the End of the Maze");
+        logger.info("****** Reached the End of the Maze");
 
         Path solution = new Path(path);
         solution.factorize();
