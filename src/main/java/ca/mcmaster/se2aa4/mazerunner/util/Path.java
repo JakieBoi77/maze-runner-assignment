@@ -1,17 +1,21 @@
-package ca.mcmaster.se2aa4.mazerunner;
+package ca.mcmaster.se2aa4.mazerunner.util;
 
 import java.util.regex.*;
 
 public class Path {
     
-    String path;
+    private String path;
 
-    Path(String input_path) {
+    public Path(String input_path) {
         this.path = input_path;
     }
 
     public void print() {
         System.out.println(path);
+    }
+
+    public String getString() {
+        return this.path;
     }
 
     public void factorize() {
