@@ -32,7 +32,6 @@ public class GraphMazeFactory implements MazeFactory<GraphMaze> {
         this.rows = maze.getSizeY();
 
         Map<Integer, List<Integer>> adjList = new HashMap<>();
-        
         for (int col = 0; col < cols; col++) {
             for (int row = 0; row < rows; row++) {
 
@@ -54,7 +53,13 @@ public class GraphMazeFactory implements MazeFactory<GraphMaze> {
             }
         }
 
-        return new GraphMaze(adjList);
+        Coordinate start = maze.getStart();
+        int startIndex = getIndex(start.x(), start.y());
+
+        Coordinate end = maze.getEnd();
+        int endIndex = getIndex(end.x(), end.y());
+
+        return new GraphMaze(adjList, startIndex, endIndex);
     }
 
     // Helper function to select index
