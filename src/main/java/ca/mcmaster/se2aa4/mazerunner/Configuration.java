@@ -48,11 +48,11 @@ public class Configuration {
                         this.mazeService = new RightHandSolver(standardMazeFactory.build(mazeFile));
                         break;
 
-                    case "dijkstra":
-                        // Initialize a DijkstraSolver maze service
+                    case "bfs":
+                        // Initialize a BreadthFirstSearchSolver maze service
                         logger.info("Using dijkstra maze solving algorithm.");
                         MazeFactory<GraphMaze> graphMazeFactory = new GraphMazeFactory();
-                        this.mazeService = new DijkstraSolver(graphMazeFactory.build(mazeFile));
+                        this.mazeService = new BreadthFirstSearchSolver(graphMazeFactory.build(mazeFile));
                         break;
 
                     default:
