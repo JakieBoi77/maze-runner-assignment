@@ -3,31 +3,22 @@ package ca.mcmaster.se2aa4.mazerunner;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import ca.mcmaster.se2aa4.mazerunner.services.MazeService;
+
 public class Main {
 
     private static final Logger logger = LogManager.getLogger();
 
     public static void main(String[] args) {
         
-        //Walking Skeleton
-        logger.info("********** Starting Maze Runner");
+        logger.info("***************** Starting Maze Runner");
 
         Configuration config = new Configuration(args);
 
-        Maze maze = new Maze(config.maze);
-        
-        Solver solver = new RightHandSolver();
+        MazeService service = config.getSerivce();
 
-        if (config.path_provided) {
-            Path provided = new Path(config.path);
-            provided.unfactorize();
-            solver.check(maze, provided);
-        } else {
-            Path solution = solver.solveMaze(maze);
-            solution.factorize();
-            solution.print();
-        }
-        
-        logger.info("********** End of MazeRunner");
+        service.run();
+
+        logger.info("***************** End of MazeRunner");
     }
 }
