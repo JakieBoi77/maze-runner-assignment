@@ -43,14 +43,14 @@ public class Configuration {
 
                     case "righthand":
                         // Initialize a RightHandSolver maze service
-                        logger.info("Using righthand maze solving algorithm.");
+                        logger.info("******** Using righthand maze solving algorithm.");
                         MazeFactory<StandardMaze> standardMazeFactory = new StandardMazeFactory();
                         this.mazeService = new RightHandSolver(standardMazeFactory.build(mazeFile));
                         break;
 
                     case "bfs":
                         // Initialize a BreadthFirstSearchSolver maze service
-                        logger.info("Using BFS maze solving algorithm.");
+                        logger.info("******** Using BFS maze solving algorithm.");
                         MazeFactory<GraphMaze> graphMazeFactory = new GraphMazeFactory();
                         this.mazeService = new BreadthFirstSearchSolver(graphMazeFactory.build(mazeFile));
                         break;

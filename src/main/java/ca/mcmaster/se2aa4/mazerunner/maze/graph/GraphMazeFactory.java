@@ -43,27 +43,23 @@ public class GraphMazeFactory implements MazeFactory<GraphMaze> {
 
                     for (CardinalDirection direction : CardinalDirection.values()) {
                         Coordinate adj = coord.get(direction);
-                        if (!maze.isWall(adj)) {
-                            neighbors.add(adj.x(), adj.y());
+                        try {
+                            if (!maze.isWall(adj)) {
+                                neighbors.add(getIndex(adj.x(), adj.y()));
+                            }
+                            adjList.put(currentNode, neighbors);
+                        } catch (IllegalStateException e) {
+                            continue;
                         }
-                        adjList.put(currentNode, neighbors);
                     }
-
                 }
             }
         }
 
-        Coordinate start = maze.getStart();
-        int startIndex = getIndex(start.x(), start.y());
-
-        Coordinate end = maze.getEnd();
-        int endIndex = getIndex(end.x(), end.y());
-
-        return new GraphMaze(adjList, startIndex, endIndex);
+        return new GraphMaze(adjList, maze);
     }
 
-    // Helper function to select index
     private int getIndex(int col, int row) {
-        return row * this.rows + col;
+        return row * this.cols + col;
     }
 }

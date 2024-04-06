@@ -17,6 +17,8 @@ public class Main {
 
         MazeService service = config.getSerivce();
 
+        logger.info("***************** Running Maze Service");
+
         service.run();
 
         logger.info("***************** End of MazeRunner");

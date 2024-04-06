@@ -55,13 +55,11 @@ public class StandardMaze implements Maze {
         
         int xVal = coord.x();
         if (xVal < 0 || xVal > getSizeX() - 1) {
-            logger.error("********* x-value is out of bounds.");
             throw new IllegalStateException("x-value, " + xVal + ", is out of bounds.");
         }
 
         int yVal = coord.y();
         if (yVal < 0 || yVal > getSizeY() - 1) {
-            logger.error("********* y-value is out of bounds.");
             throw new IllegalStateException("y-value, " + yVal + ", is out of bounds.");
         }
 
