@@ -19,6 +19,11 @@ public class Path {
     }
 
     public void factorize() {
+        
+        if (this.path.equals("")) {
+            return;
+        }
+
         String moves = this.path.replaceAll(" ", "");
         StringBuilder factorized_path = new StringBuilder();
 

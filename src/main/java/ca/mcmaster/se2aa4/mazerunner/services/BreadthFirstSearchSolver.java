@@ -34,7 +34,7 @@ public class BreadthFirstSearchSolver implements MazeService {
     }
 
     @Override
-    public void run() {
+    public String run() {
 
         logger.info("Running BFS");
         bfs(this.maze, this.start);
@@ -43,7 +43,7 @@ public class BreadthFirstSearchSolver implements MazeService {
 
         if (graphPath == null) {
             logger.error("Path not found. Inavlid Maze.");
-            return;
+            return "";
         }
 
         logger.info("Cosntructing Maze Path");
@@ -78,7 +78,7 @@ public class BreadthFirstSearchSolver implements MazeService {
 
         Path path = new Path(mazePath);
         path.factorize();
-        path.print();
+        return path.getString();
     }
 
     private void bfs(GraphMaze maze, int start) {

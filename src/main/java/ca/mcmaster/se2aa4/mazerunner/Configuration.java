@@ -23,13 +23,15 @@ public class Configuration {
 
         try {
             cmd = parser.parse(getParserOptions(), args);
-            
+
             // Get maze from i flag
             String mazeFile = cmd.getOptionValue("i");
+            
 
             // Check for p flag
             if (cmd.hasOption("p")) {
                 // Initialize a PathChecker maze service
+                logger.info("******** Initializing the path checker.");
                 Path path = new Path(cmd.getOptionValue("p"));
                 MazeFactory<StandardMaze> standardMazeFactory = new StandardMazeFactory();
                 this.mazeService = new PathChecker(standardMazeFactory.build(mazeFile), path);
@@ -37,7 +39,7 @@ public class Configuration {
             }
 
             // Check for m flag
-            if (cmd.hasOption("m")) {
+            else if (cmd.hasOption("m")) {
                 String method = cmd.getOptionValue("m");
                 switch (method) {
 
@@ -58,19 +60,19 @@ public class Configuration {
                     default:
                         throw new ParseException("Maze solving method '" + method + "' not supported.");
                 }
-
-            } else {
-
-                // Initialize a RightHandSolver maze service by default (no m flag)
-                logger.info("Using default righthand maze solving algorithm.");
+            }
+            
+            // no m flag or p flag
+            else {
+                // Initialize a RightHandSolver maze service by default
+                logger.info("******** Using default righthand maze solving algorithm.");
                 MazeFactory<StandardMaze> standardMazeFactory = new StandardMazeFactory();
                 this.mazeService = new RightHandSolver(standardMazeFactory.build(mazeFile));
             }
             
         } catch (ParseException pe) {
-            System.err.println("Configuration failed.  Reason: " + pe.getMessage());
-            logger.error("Configuration failed.  Reason: " + pe.getMessage());
-            logger.error("PATH NOT COMPUTED");
+            logger.error("******** Configuration failed.  Reason: " + pe.getMessage());
+            logger.error("******** PATH NOT COMPUTED");
         }
     }
 

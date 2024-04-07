@@ -26,7 +26,7 @@ public class GraphMazeFactory implements MazeFactory<GraphMaze> {
         MazeFactory<StandardMaze> standardMazeFactory = new StandardMazeFactory();
         StandardMaze maze = standardMazeFactory.build(mazeFile);
 
-        logger.info("Converting Standard Maze to Graph Maze");
+        logger.info("***** Converting Standard Maze to Graph Maze");
 
         this.cols = maze.getSizeX();
         this.rows = maze.getSizeY();

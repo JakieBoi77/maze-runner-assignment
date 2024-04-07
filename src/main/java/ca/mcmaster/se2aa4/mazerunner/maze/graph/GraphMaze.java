@@ -20,7 +20,7 @@ public class GraphMaze implements Maze {
     public GraphMaze(Map<Integer, List<Integer>> adjList, StandardMaze maze) {
         this.adjList = adjList;
         this.maze = maze;
-        logger.info("Graph Maze created.");
+        logger.info("************ Graph Maze created.");
     }
 
     public int getStartIndex() {
@@ -49,6 +49,10 @@ public class GraphMaze implements Maze {
 
     public int getSizeY() {
         return this.maze.getSizeY();
+    }
+
+    public Map<Integer, List<Integer>> getAdjList() {
+        return this.adjList;
     }
 
     private int getIndex(int col, int row) {

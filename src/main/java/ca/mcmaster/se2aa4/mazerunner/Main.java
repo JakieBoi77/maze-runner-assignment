@@ -19,7 +19,9 @@ public class Main {
 
         logger.info("***************** Running Maze Service");
 
-        service.run();
+        String result = service.run();
+        
+        System.out.println(result);
 
         logger.info("***************** End of MazeRunner");
     }

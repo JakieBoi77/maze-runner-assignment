@@ -34,7 +34,6 @@ public class MazeParser {
                 maze.add(row);
             }
         } catch(Exception e) {
-            System.err.println("MazeParser failed to build the maze.  Reason: " + e.getMessage());
             logger.error("MazeParser failed to build the maze.  Reason: " + e.getMessage());
             logger.error("PATH NOT COMPUTED");
         }

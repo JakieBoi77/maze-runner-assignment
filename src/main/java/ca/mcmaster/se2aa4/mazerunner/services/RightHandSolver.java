@@ -19,7 +19,7 @@ public class RightHandSolver implements MazeService {
     }
 
     @Override
-    public void run() {
+    public String run() {
         logger.info("****** Computing Path");
 
         Coordinate currentPos = this.maze.getStart();
@@ -68,6 +68,6 @@ public class RightHandSolver implements MazeService {
 
         Path solution = new Path(path);
         solution.factorize();
-        solution.print();
+        return solution.getString();
     }
 }

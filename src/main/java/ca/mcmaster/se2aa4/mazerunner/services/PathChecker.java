@@ -22,7 +22,7 @@ public class PathChecker implements MazeService {
         this.path = providedPath.getString();
     }
     
-    public void run() {
+    public String run() {
         logger.info("********** Validating Path");
         
         Coordinate currentPos = this.maze.getStart();
@@ -35,12 +35,12 @@ public class PathChecker implements MazeService {
                 if (this.maze.isWall(currentPos)) {
                     logger.info("********** Entered a wall. Invalid Path.");
                     System.out.println("Incorrect Path!");
-                    return;
+                    return "";
                 }
             } catch (IllegalStateException e) {
                 logger.info("********** Exited the maze bounds. Invalid Path.");
                 System.out.println("Incorrect Path!");
-                return;
+                return "";
             }
 
             char nextMove = path.charAt(i);
@@ -65,10 +65,10 @@ public class PathChecker implements MazeService {
 
         if ((currentPos.x() == endPos.x()) && (currentPos.y() == endPos.y())) {
             logger.info("********** Reached the end position!");
-            System.out.println("Correct Path!");
+            return "Correct Path!";
         } else {
             logger.info("********** Did not make it to the end postion!");
-            System.out.println("Incorrect Path!");
+            return "Incorrect Path!";
         }
     }
 }
