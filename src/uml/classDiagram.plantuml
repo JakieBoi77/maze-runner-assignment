@@ -1,0 +1,70 @@
+@startuml High Level Class Diagram
+hide empty members
+
+package util <<Frame>> {
+    class Path
+    class Coordinate
+    enum CardinalDirection{
+        NORTH
+        EAST
+        SOUTH
+        WEST
+    }
+    Coordinate --> CardinalDirection
+}
+
+package maze <<Frame>> {
+    enum MazeElement{
+        SPACE
+        WALL
+    }
+    interface Maze
+    interface MazeFactory
+    class MazeParser
+    MazeParser --> MazeElement
+    standard.StandardMaze --> MazeElement
+
+    package standard <<Frame>> {
+        class StandardMazeFactory implements maze.MazeFactory
+        class StandardMaze
+        StandardMazeFactory --> MazeParser
+        StandardMazeFactory ..> StandardMaze
+        StandardMaze ..|> Maze
+        StandardMaze ..> Coordinate
+    }
+
+    package graph <<Frame>> {
+        class GraphMazeFactory implements maze.MazeFactory
+        class GraphMaze
+        GraphMazeFactory --> StandardMazeFactory
+        GraphMazeFactory ..> GraphMaze
+        GraphMazeFactory --> StandardMaze
+        GraphMaze ..|> Maze
+        GraphMaze *-- StandardMaze
+    }
+}
+
+package services <<Frame>> {
+    interface MazeService
+    class RightHandSolver implements MazeService
+    RightHandSolver *-- StandardMaze
+    class PathChecker implements MazeService
+    PathChecker *-- StandardMaze
+    class BreadthFirstSearchSolver implements MazeService
+    BreadthFirstSearchSolver *-- GraphMaze
+
+    RightHandSolver ..> util
+    PathChecker ..> util
+    BreadthFirstSearchSolver ..> util
+}
+
+class Main
+class Configuration
+Main *-- Configuration
+Main ..> MazeService
+Configuration *-- MazeService
+Configuration *-- MazeFactory
+
+
+
+@enduml

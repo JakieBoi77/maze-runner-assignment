@@ -1,0 +1,64 @@
+@startuml High Level Sequence Diagram
+
+actor User
+participant Main
+participant Configuration
+participant MazeFactory
+participant Maze
+participant MazeService
+
+
+User -> Main: args
+activate Main
+Main -> Configuration: new Configuration(args)
+activate Configuration
+
+
+
+alt Path Checker
+    Configuration -> MazeFactory: new StandardMazeFactory()
+    activate MazeFactory
+    MazeFactory -> Configuration: factory
+    deactivate MazeFactory
+    Configuration -> Maze: factory.build()
+    activate Maze
+    Maze -> Configuration: standardMaze
+    deactivate
+    Configuration -> MazeService: new PathChecker(standardMaze)
+    activate MazeService
+else Right Hand Solver
+    Configuration -> MazeFactory: new StandardMazeFactory()
+    activate MazeFactory
+    MazeFactory -> Configuration: factory
+    deactivate MazeFactory
+    Configuration -> Maze: factory.build()
+    activate Maze
+    Maze -> Configuration: standardMaze
+    deactivate
+    Configuration -> MazeService: new RightHandSolver(standardMaze)
+else Breadth First Search
+    Configuration -> MazeFactory: new GraphMazeFactory()
+    activate MazeFactory
+    MazeFactory -> Configuration: factory
+    deactivate MazeFactory
+    Configuration -> Maze: factory.build()
+    activate Maze
+    Maze -> Configuration: graphMaze
+    deactivate
+    Configuration -> MazeService: new BreadthFirstSearchSolver(graphMaze)
+end
+
+MazeService -> Configuration: mazeService
+
+Configuration -> Main: config
+Main -> Configuration: config.getService()
+Configuration -> Main: service
+deactivate Configuration
+Main -> MazeService: service.run()
+
+MazeService -> Main: result
+deactivate MazeService
+Main -> User: print(result)
+
+
+@enduml

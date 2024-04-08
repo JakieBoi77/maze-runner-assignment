@@ -8,7 +8,6 @@ import ca.mcmaster.se2aa4.mazerunner.maze.standard.StandardMaze;
 import ca.mcmaster.se2aa4.mazerunner.maze.standard.StandardMazeFactory;
 import ca.mcmaster.se2aa4.mazerunner.services.MazeService;
 import ca.mcmaster.se2aa4.mazerunner.services.PathChecker;
-import ca.mcmaster.se2aa4.mazerunner.services.RightHandSolver;
 import ca.mcmaster.se2aa4.mazerunner.util.Path;
 
 public class PathCheckerTest {
