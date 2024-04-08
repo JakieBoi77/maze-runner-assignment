@@ -26,7 +26,6 @@ public class Configuration {
 
             // Get maze from i flag
             String mazeFile = cmd.getOptionValue("i");
-            
 
             // Check for p flag
             if (cmd.hasOption("p")) {
@@ -41,25 +40,38 @@ public class Configuration {
             // Check for m flag
             else if (cmd.hasOption("m")) {
                 String method = cmd.getOptionValue("m");
-                switch (method) {
 
-                    case "righthand":
-                        // Initialize a RightHandSolver maze service
-                        logger.info("******** Using righthand maze solving algorithm.");
-                        MazeFactory<StandardMaze> standardMazeFactory = new StandardMazeFactory();
-                        this.mazeService = new RightHandSolver(standardMazeFactory.build(mazeFile));
-                        break;
+                // Check for b flag
+                if (cmd.hasOption("b")) {
+                    
+                    // Enter benchmarking mode
+                    logger.info("******** Benchmarking mode enabled.");
+                    String baselineMethod = cmd.getOptionValue("b");
 
-                    case "bfs":
-                        // Initialize a BreadthFirstSearchSolver maze service
-                        logger.info("******** Using BFS maze solving algorithm.");
-                        MazeFactory<GraphMaze> graphMazeFactory = new GraphMazeFactory();
-                        this.mazeService = new BreadthFirstSearchSolver(graphMazeFactory.build(mazeFile));
-                        break;
-
-                    default:
-                        throw new ParseException("Maze solving method '" + method + "' not supported.");
+                    this.mazeService = new CompareMazeSolver(mazeFile, method, baselineMethod);
                 }
+                
+                // No b flag
+                else {
+                    switch (method) {
+                        case "righthand":
+                            // Initialize a RightHandSolver maze service
+                            logger.info("******** Using righthand maze solving algorithm.");
+                            MazeFactory<StandardMaze> standardMazeFactory = new StandardMazeFactory();
+                            this.mazeService = new RightHandSolver(standardMazeFactory.build(mazeFile));
+                            break;
+
+                        case "bfs":
+                            // Initialize a BreadthFirstSearchSolver maze service
+                            logger.info("******** Using BFS maze solving algorithm.");
+                            MazeFactory<GraphMaze> graphMazeFactory = new GraphMazeFactory();
+                            this.mazeService = new BreadthFirstSearchSolver(graphMazeFactory.build(mazeFile));
+                            break;
+
+                        default:
+                            throw new ParseException("Maze solving method '" + method + "' not supported.");
+                    }
+                } 
             }
             
             // no m flag or p flag
@@ -85,6 +97,7 @@ public class Configuration {
 
         options.addOption("p", "path", true, "Verfies the given path with the provided maze.");
         options.addOption("m", "method", true, "Selects a maze solving algorithm.");
+        options.addOption("b", "baseline", true, "Selects a comparision baseline.");
 
         return options;
     }

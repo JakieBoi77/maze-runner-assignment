@@ -19,8 +19,9 @@ alt Path Checker
     Configuration -> MazeFactory: new StandardMazeFactory()
     activate MazeFactory
     MazeFactory -> Configuration: factory
+    Configuration -> MazeFactory: build()
+    MazeFactory -> Maze: new StandardMaze()
     deactivate MazeFactory
-    Configuration -> Maze: factory.build()
     activate Maze
     Maze -> Configuration: standardMaze
     deactivate
@@ -30,8 +31,9 @@ else Right Hand Solver
     Configuration -> MazeFactory: new StandardMazeFactory()
     activate MazeFactory
     MazeFactory -> Configuration: factory
+    Configuration -> MazeFactory: build()
+    MazeFactory -> Maze: new StandardMaze()
     deactivate MazeFactory
-    Configuration -> Maze: factory.build()
     activate Maze
     Maze -> Configuration: standardMaze
     deactivate
@@ -40,8 +42,9 @@ else Breadth First Search
     Configuration -> MazeFactory: new GraphMazeFactory()
     activate MazeFactory
     MazeFactory -> Configuration: factory
+    Configuration -> MazeFactory: build()
+    MazeFactory -> Maze: new GraphMaze()
     deactivate MazeFactory
-    Configuration -> Maze: factory.build()
     activate Maze
     Maze -> Configuration: graphMaze
     deactivate
@@ -55,7 +58,7 @@ Main -> Configuration: config.getService()
 Configuration -> Main: service
 deactivate Configuration
 Main -> MazeService: service.run()
-
+MazeService -> MazeService: Check Path / Compute Path
 MazeService -> Main: result
 deactivate MazeService
 Main -> User: print(result)

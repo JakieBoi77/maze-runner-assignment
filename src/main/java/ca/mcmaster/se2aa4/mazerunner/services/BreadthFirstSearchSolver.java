@@ -9,6 +9,7 @@ import java.util.Stack;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import ca.mcmaster.se2aa4.mazerunner.maze.Maze;
 import ca.mcmaster.se2aa4.mazerunner.maze.graph.GraphMaze;
 import ca.mcmaster.se2aa4.mazerunner.util.CardinalDirection;
 import ca.mcmaster.se2aa4.mazerunner.util.Path;
@@ -24,13 +25,19 @@ public class BreadthFirstSearchSolver implements MazeService {
     private int cols;
     private GraphMaze maze;
 
-    public BreadthFirstSearchSolver(GraphMaze maze) {
+    public BreadthFirstSearchSolver(Maze maze) {
         this.marked = new HashMap<>();
         this.edgeTo = new HashMap<>();
-        this.start = maze.getStartIndex();
-        this.end = maze.getEndIndex();
-        this.cols = maze.getSizeX();
-        this.maze = maze;
+        if (maze instanceof GraphMaze) {
+            GraphMaze graphMaze = (GraphMaze) maze;
+            this.start = graphMaze.getStartIndex();
+            this.end = graphMaze.getEndIndex();
+            this.cols = graphMaze.getSizeX();
+            this.maze = graphMaze;
+        } else {
+            throw new IllegalArgumentException("Maze must be an instance of GraphMaze");
+        }
+        
     }
 
     @Override

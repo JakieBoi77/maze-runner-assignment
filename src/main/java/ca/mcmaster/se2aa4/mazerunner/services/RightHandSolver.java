@@ -3,6 +3,7 @@ package ca.mcmaster.se2aa4.mazerunner.services;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import ca.mcmaster.se2aa4.mazerunner.maze.Maze;
 import ca.mcmaster.se2aa4.mazerunner.maze.standard.StandardMaze;
 import ca.mcmaster.se2aa4.mazerunner.util.CardinalDirection;
 import ca.mcmaster.se2aa4.mazerunner.util.Coordinate;
@@ -14,8 +15,12 @@ public class RightHandSolver implements MazeService {
 
     StandardMaze maze;
 
-    public RightHandSolver(StandardMaze maze) {
-        this.maze = maze;
+    public RightHandSolver(Maze maze) {
+        if (maze instanceof StandardMaze) {
+            this.maze = (StandardMaze) maze;
+        } else {
+            throw new IllegalArgumentException("Maze must be an instance of StandardMaze");
+        }
     }
 
     @Override
