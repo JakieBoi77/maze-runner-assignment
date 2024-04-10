@@ -24,11 +24,11 @@ public class Path {
             return;
         }
 
-        String moves = this.path.replaceAll(" ", "");
+        String moves = this.path.replace(" ", "");
         StringBuilder factorized_path = new StringBuilder();
 
         int count = 1;
-        char current_move = ' ';
+        char current_move;
         for (int i = 0; i < moves.length() - 1; i++) {
             current_move = moves.charAt(i);
 
@@ -67,7 +67,7 @@ public class Path {
         while (matcher.find()) {
 
             int number;
-            if (matcher.group(1) != "") {
+            if (!matcher.group(1).equals("")) {
                 number = Integer.parseInt(matcher.group(1));
             } else {
                 number = 1;

@@ -16,7 +16,7 @@ public class MazeParserTest {
     @Test
     public void testMazeParser() {
         MazeParser mazeParser = new MazeParser(testMaze);
-        List<List<MazeElement>> maze = mazeParser.getMaze();
+        List<List<MazeElement>> maze = mazeParser.getFullMaze();
 
         assertEquals(5, maze.get(0).size());
         assertEquals(5, maze.size());

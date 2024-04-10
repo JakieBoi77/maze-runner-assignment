@@ -17,6 +17,6 @@ public class StandardMazeFactory implements MazeFactory<StandardMaze> {
         
         MazeParser parser = new MazeParser(mazeFile);
 
-        return new StandardMaze(parser.getMaze());
+        return new StandardMaze(parser.getFullMaze());
     }
 }

@@ -13,7 +13,7 @@ import ca.mcmaster.se2aa4.mazerunner.util.Coordinate;
 public class StandardMazeTest {
     
     private final String testMaze = "./examples/direct.maz.txt";
-    private StandardMaze standardMaze = new StandardMaze((new MazeParser(testMaze)).getMaze());
+    private StandardMaze standardMaze = new StandardMaze((new MazeParser(testMaze)).getFullMaze());
 
     @Test
     public void testGetSizeX() {

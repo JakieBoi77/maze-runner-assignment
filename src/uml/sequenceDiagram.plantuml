@@ -54,10 +54,10 @@ end
 MazeService -> Configuration: mazeService
 
 Configuration -> Main: config
-Main -> Configuration: config.getService()
+Main -> Configuration: getService()
 Configuration -> Main: service
 deactivate Configuration
-Main -> MazeService: service.run()
+Main -> MazeService: run()
 MazeService -> MazeService: Check Path / Compute Path
 MazeService -> Main: result
 deactivate MazeService

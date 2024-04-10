@@ -52,6 +52,9 @@ package services <<Frame>> {
     PathChecker *-- StandardMaze
     class BreadthFirstSearchSolver implements MazeService
     BreadthFirstSearchSolver *-- GraphMaze
+    class CompareMazeSolver implements MazeService
+    CompareMazeSolver *-- GraphMaze
+    CompareMazeSolver *-- StandardMaze
 
     RightHandSolver ..> util
     PathChecker ..> util

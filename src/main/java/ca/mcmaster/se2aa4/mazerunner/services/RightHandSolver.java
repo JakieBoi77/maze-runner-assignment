@@ -38,33 +38,29 @@ public class RightHandSolver implements MazeService {
             
             // Check wall on the right
             boolean wallOnRight = this.maze.isWall(currentPos.get(direction.right()));
-
             // Check wall in front
             boolean wallInFront = this.maze.isWall(currentPos.get(direction));
 
-            //When wall on right and wall in front, turn left
-            if (wallOnRight && wallInFront) {
-                logger.info("****** Turn Left");
-                direction = direction.left();
-                path += "L";
-            } 
-            //When wall on right and no wall in front, move forward
-            else if (wallOnRight && !wallInFront) {
-                logger.info("****** Move Forward");
-                currentPos = currentPos.get(direction);
-                path += "F";
-            } 
-            //When no wall on right turn right and move forward
-            else if (!wallOnRight){
+            if (wallOnRight) {
+                //When wall on right and wall in front, turn left
+                if (wallInFront) {
+                    logger.info("****** Turn Left");
+                    direction = direction.left();
+                    path += "L";
+                }
+                //When wall on right and no wall in front, move forward
+                else {
+                    logger.info("****** Move Forward");
+                    currentPos = currentPos.get(direction);
+                    path += "F";
+                }
+            } else {
+                //When no wall on right turn right and move forward
                 logger.info("****** Turn Right and Moving Forward");
                 direction = direction.right();
                 path += "R";
                 currentPos = currentPos.get(direction);
                 path += "F";
-            }
-            //Terminate otherwise
-            else {
-                logger.error("Wall Lost!");
             }
             logger.info("****** New Position: x = " + currentPos.x() + ", y = " + currentPos.y());
         }

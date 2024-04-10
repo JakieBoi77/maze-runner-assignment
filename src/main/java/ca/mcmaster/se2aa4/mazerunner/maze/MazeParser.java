@@ -12,7 +12,7 @@ public class MazeParser {
 
     private static final Logger logger = LogManager.getLogger();
 
-    private List<List<MazeElement>> maze;
+    private List<List<MazeElement>> fullMaze;
     
     public MazeParser(String mazeFile) {
         logger.info("*********** Reading the maze from file " + mazeFile);
@@ -38,11 +38,11 @@ public class MazeParser {
             logger.error("PATH NOT COMPUTED");
         }
 
-        this.maze = maze;
+        this.fullMaze = maze;
         logger.info("*********** Maze successfully read.");
     }
 
-    public List<List<MazeElement>> getMaze() {
-        return this.maze;
+    public List<List<MazeElement>> getFullMaze() {
+        return this.fullMaze;
     }
 }
