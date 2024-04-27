@@ -2,6 +2,8 @@
 
 This program explores a maze, finding a path from an entry point to an exit one.
 
+## Business Logic Specification
+
 - The maze is stored in a text file, with `#` representing walls and `␣` (_empty space_) representing passages.
 - You’ll find examples of such mazes in the [`examples`](./examples) directory. 
     - You can also use the [Maze Generator](https://github.com/ace-lectures/maze-gen) to generate others.
